@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './index.scss';
 import App from './App';
 import {setupStore} from "./store/store";
 import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 
 const store = setupStore();
 
@@ -12,8 +13,10 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <Provider store={store}>
-        <App/>
-    </Provider>
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>
 );
 
