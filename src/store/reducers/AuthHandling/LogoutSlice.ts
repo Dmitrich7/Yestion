@@ -17,18 +17,17 @@ export const logoutSlice = createSlice({
     reducers: {},
     extraReducers: builder=>{
         builder
-            .addCase(logout.pending,(state)=>{
-                state.isLoading = true;
-            })
-            .addCase(logout.fulfilled,(state)=>{
-                state.isLoading = false;
-                localStorage.removeItem("Authorization");
-            })
-            .addCase(logout.rejected,(state,action)=>{
-                state.isLoading = false;
-                state.error = action.error.message??"";
-            })
-
+        .addCase(logout.pending,(state)=>{
+            state.isLoading = true;
+        })
+        .addCase(logout.fulfilled,(state)=>{
+            state.isLoading = false;
+            localStorage.removeItem("Authorization");
+        })
+        .addCase(logout.rejected,(state,action)=>{
+            state.isLoading = false;
+            state.error = action.error.message??"";
+        })
     }
 })
 

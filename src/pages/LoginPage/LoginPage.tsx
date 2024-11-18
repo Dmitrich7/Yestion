@@ -3,22 +3,24 @@ import styles from "./LoginPage.module.scss"
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {login} from "../../store/reducers/AuthHandling/ActionCreators";
 import {ICredentials} from "../../models/models";
-
+import {useNavigate} from "react-router-dom";
 
 const LoginPage = () => {
     const [formData, setFormData] = useState<ICredentials>({username:"",password:""})
     const dispatch = useAppDispatch();
-    const {error,isLoading} = useAppSelector(state => state.loginReducer)
+    const navigate = useNavigate();
+    const {isLoading} = useAppSelector(state => state.persistedLoginReducer)
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        dispatch(login(formData));
+        dispatch(login(formData)).then((res)=>{
+            if(res.payload!=""){
+                navigate("/")
+            }
+        });
     }
     const handleChange = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
         setFormData({...formData,[e.target.name]:e.target.value})
     }
-    useEffect(()=>{
-        console.log(error)
-    },[error])
     return (
         <div className={styles.container}>
             <form onSubmit={(e)=>handleSubmit(e)} className={styles.form}>
@@ -28,6 +30,7 @@ const LoginPage = () => {
                     placeholder="Имя пользователя"
                     className={styles.input}
                     onChange={(e)=>handleChange(e)}
+                    disabled={isLoading}
                 />
                 <input
                     name='password'
@@ -35,6 +38,7 @@ const LoginPage = () => {
                     placeholder="Пароль"
                     onChange={(e)=>handleChange(e)}
                     className={styles.input}
+                    disabled={isLoading}
                 />
                 <button disabled={isLoading} type="submit" className={styles.button}>Login</button>
             </form>

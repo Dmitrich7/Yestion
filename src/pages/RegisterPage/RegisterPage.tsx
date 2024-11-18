@@ -2,20 +2,30 @@ import React, {useState} from 'react';
 import styles from "./RegisterPage.module.scss"
 import {ICredentials} from "../../models/models";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {register} from "../../store/reducers/AuthHandling/ActionCreators";
+import {login, register} from "../../store/reducers/AuthHandling/ActionCreators";
+import {useNavigate} from "react-router-dom";
 
 const LoginPage = () => {
-    const [formData, setFormData] = useState<ICredentials>({username:"",password:""})
+    const [formData, setFormData] = useState<ICredentials&{confirmPassword: string}>({username:"",password:"",confirmPassword:""})
     const dispatch = useAppDispatch();
-    const {error,isLoading} = useAppSelector(state => state.loginReducer)
+    const navigate = useNavigate();
+    const {isLoading,error} = useAppSelector(state => state.persistedLoginReducer)
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        dispatch(register(formData)).then(()=>{console.log("ball" + error)});
+        if(formData.confirmPassword==formData.password){
+            dispatch(register(formData as ICredentials)).then((res)=>{
+                if(res.payload!=""){
+                    navigate("/login")
+                }
+            });
+        }
     }
-
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
+        setFormData({...formData,[e.target.name]:e.target.value})
+    }
     return (
         <div className={styles.container}>
-            <form className={styles.form}>
+            <form onSubmit={e=>handleSubmit(e)} className={styles.form}>
                 <span className={styles.span}>Зарегистрироваться</span>
                 <input
                     name='username'
@@ -25,10 +35,18 @@ const LoginPage = () => {
                 <input
                     name='password'
                     type="password"
+                    onChange={(e)=>handleChange(e)}
                     placeholder="Пароль"
                     className={styles.input}
                 />
-                <button type="submit" className={styles.button}>Register</button>
+                <input
+                    name='confirm password'
+                    type="password"
+                    onChange={(e)=>handleChange(e)}
+                    placeholder="Подтвердите пароль"
+                    className={styles.input}
+                />
+                <button disabled={isLoading} type="submit" className={styles.button}>Register</button>
             </form>
         </div>
     );

@@ -2,10 +2,14 @@ import React from 'react';
 import classes from "./Navbar.module.scss";
 import {ReactComponent as Logo} from "../../assets/Yestion-logo.svg"
 import { useNavigate } from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {logout} from "../../store/reducers/AuthHandling/ActionCreators";
 
 const Navbar = () => {
 
     const navigate = useNavigate();
+    const {isLoggedIn} = useAppSelector(state => state.persistedLoginReducer);
+    const dispatch = useAppDispatch();
 
     return (
         <div className={classes.navbar}>
@@ -17,8 +21,16 @@ const Navbar = () => {
 
             </div>
             <div className={classes.authGroup}>
-                <button onClick={()=>navigate("/login")} className={classes.login}>Войти</button>
-                <button onClick={()=>navigate("/register")} className={classes.register}>Зарегистрироваться</button>
+                {!isLoggedIn?
+                    <>
+                        <button onClick={()=>navigate("/login")} className={classes.login}>Войти</button>
+                        <button onClick={()=>navigate("/register")} className={classes.register}>Зарегистрироваться</button>
+                    </>
+                    :
+                    <>
+                        <button onClick={()=>dispatch(logout())} className={classes.logoff}>Выйти</button>
+                    </>
+                }
             </div>
         </div>
     );
