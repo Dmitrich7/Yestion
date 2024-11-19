@@ -28,6 +28,7 @@ const Navbar = () => {
                     </>
                     :
                     <>
+                        <button onClick={()=>navigate("/workspace")} className={classes.profile}>Мои рабочие пространства</button>
                         <button onClick={()=>dispatch(logout())} className={classes.logoff}>Выйти</button>
                     </>
                 }

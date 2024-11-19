@@ -13,7 +13,6 @@ const initialState: ILoginSlice = {
     error: ''
 }
 
-
 export const loginSlice = createSlice({
     name: "login",
     initialState: initialState,

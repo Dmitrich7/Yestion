@@ -1,0 +1,49 @@
+@use "src/mixins/typography" as mixins;
+
+
+.page{
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  .content{
+    .mainTitle{
+      @include mixins.typography;
+      margin-bottom: 10px;
+      font-size: 60px;
+
+    }
+    .subTitle{
+      @include mixins.typography;
+      font-weight: 400;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    .contentButtonGroup{
+      height: 25%;
+      .wonderful{
+        width:35%;
+        min-width: fit-content;
+        height: 100%;
+        border-radius: 0.3125rem;
+        padding-left: 5px;
+        padding-right: 5px;
+        cursor: pointer;
+        background-color: #00beff;
+        color: white;
+        @include mixins.typography;
+      }
+      .thanks{
+        width:35%;
+        min-width: fit-content;
+        height: 100%;
+        border-radius: 0.3125rem;
+        padding-left: 5px;
+        padding-right: 5px;
+        cursor: pointer;
+        @include mixins.typography;
+        margin-left: 15px;
+        margin-top: 15px;
+      }
+    }
+  }
+}

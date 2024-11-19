@@ -2,6 +2,7 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import loginReducer from "./reducers/AuthHandling/LoginSlice"
 import logoutReducer from "./reducers/AuthHandling/LogoutSlice"
 import registerReducer from "./reducers/AuthHandling/RegisterSlice"
+import dataReducer from "./reducers/AuthHandling/DataSlice"
 import {
     FLUSH,
     REHYDRATE,
@@ -11,6 +12,7 @@ import {
     REGISTER,
     persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage"
+import {dataApi} from "../Services/DataServices";
 
 
 const persistConfig = {
@@ -22,10 +24,10 @@ const persistedLoginReducer = persistReducer(persistConfig,loginReducer)
 
 
 const rootReducer = combineReducers({
-    //[dataApi.reducerPath]: dataApi.reducer,
     persistedLoginReducer,
     logoutReducer,
-    registerReducer
+    registerReducer,
+    dataReducer
 })
 
 export const setupStore = ()=> {
@@ -37,7 +39,7 @@ export const setupStore = ()=> {
                 serializableCheck: {
                     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
                 },
-            }).concat(/*userApi.middleware*/)
+            })
     })
 }
 

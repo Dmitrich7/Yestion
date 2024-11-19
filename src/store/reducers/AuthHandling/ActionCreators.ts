@@ -60,6 +60,31 @@ export const logout = createAsyncThunk(
                     "Content-Type": "application/json",
                 }
             })
+            console.log("logout")
+        }catch (e) {
+            let errorMessage = "Failed to do something exceptional";
+            if (e instanceof Error) {
+                errorMessage = e.message;
+            }
+            return thunkAPI.rejectWithValue(errorMessage)
+        }
+    }
+)
+
+export const getData = createAsyncThunk(
+    'auth/getData',
+    async (params, thunkAPI) =>{
+        try {
+            const response =
+                await fetch("http://povt-cluster.tstu.tver.ru:44666/api/data/workspacesList",{
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization" : localStorage.getItem("Authorization") as string
+                    }
+                })
+            return response.json();
         }catch (e) {
             let errorMessage = "Failed to do something exceptional";
             if (e instanceof Error) {
