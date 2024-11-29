@@ -1,15 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getData} from "./ActionCreators";
-import {IWorkspace} from "../../../models/models";
-
-interface IContent{
-    content: IWorkspace[];
-}
+import {IContent, IWorkspace} from "../../models/models";
 
 interface IDataSlice{
     data: IWorkspace[];
     isLoading: boolean;
     error: string;
+    currentWorkspaceId: number;
+    currentPageId: number;
 }
 
 const initialState: IDataSlice = {
@@ -31,13 +29,22 @@ const initialState: IDataSlice = {
         }
     ],
     isLoading: false,
-    error: ''
+    error: '',
+    currentWorkspaceId: 0,
+    currentPageId: 0
 }
 
 export const dataSlice = createSlice({
     name: "data",
     initialState: initialState,
-    reducers: {},
+    reducers: {
+        setCurrentPageId(state, action){
+            state.currentPageId = action.payload;
+        },
+        setCurrentWorkspaceId(state, action){
+            state.currentWorkspaceId = action.payload;
+        }
+    },
     extraReducers: builder=>{
         builder
             .addCase(getData.pending,(state)=>{
@@ -45,12 +52,12 @@ export const dataSlice = createSlice({
             })
             .addCase(getData.fulfilled,(state, action:PayloadAction<IContent>)=>{
                 state.isLoading = false;
-                state.data = action.payload.content;
-                console.log(action.payload.content)
-            })
-            .addCase(getData.rejected,(state, action)=>{
-                state.isLoading = false;
-                state.error = action.error.message??"";
+                state.error = "";
+                if(action.payload.content !== "Unauthorized"){
+                    state.data = action.payload.content as IWorkspace[];
+                }else{
+                    state.error = action.payload.content;
+                }
             })
     }
 })

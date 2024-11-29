@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {logout} from "./ActionCreators";
+import {logout} from "../ActionCreators";
 
 interface ILoginSlice{
     isLoading: boolean;
@@ -23,6 +23,7 @@ export const logoutSlice = createSlice({
         .addCase(logout.fulfilled,(state)=>{
             state.isLoading = false;
             localStorage.removeItem("Authorization");
+            console.log("logout")
         })
         .addCase(logout.rejected,(state,action)=>{
             state.isLoading = false;

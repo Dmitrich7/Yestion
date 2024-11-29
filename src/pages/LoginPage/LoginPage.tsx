@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./LoginPage.module.scss"
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {login} from "../../store/reducers/AuthHandling/ActionCreators";
+import {login} from "../../store/reducers/ActionCreators";
 import {ICredentials} from "../../models/models";
 import {useNavigate} from "react-router-dom";
 

@@ -18,3 +18,7 @@ export interface IWorkspace{
     name: string;
     pages: IPage[];
 }
+
+export interface IContent{
+    content: IWorkspace[] | string;
+}

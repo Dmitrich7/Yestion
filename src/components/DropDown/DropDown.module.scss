@@ -1,0 +1,24 @@
+.content{
+
+
+  .workspacesList{
+
+    .titleGroup{
+      display: flex;
+      margin-top: 5px;
+      cursor: pointer;
+      .icon{
+        transform: rotate(-90deg);
+
+      }
+      .title{
+
+      }
+      .dropdownContent{
+        height: 50px;
+        width: 50px;
+        border: 1px solid black;
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {register} from "./ActionCreators";
+import {register} from "../ActionCreators";
 
 interface IRegisterState{
     isLoading: boolean;

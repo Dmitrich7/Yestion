@@ -1,21 +1,29 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {getData} from "../../store/reducers/AuthHandling/ActionCreators";
+import {getData, logout} from "../../store/reducers/ActionCreators";
+import {useNavigate} from "react-router-dom";
 
 const WorkspacePage = () => {
     const dispatch = useAppDispatch();
-    const {data} = useAppSelector(state => state.dataReducer)
+    const {data, error} = useAppSelector(state => state.dataReducer)
+    const navigate = useNavigate();
+    useEffect(()=>{
+        dispatch(getData())
+    },[])
 
     useEffect(()=>{
-        dispatch(getData()).then(()=>{
-          console.log( data)
-        })
-    },[])
+        if(error.length!==0){
+            dispatch(logout()).then(()=>{
+                navigate("/login")
+            })
+        }
+    },[error])
 
     return (
         <div>
-            {data.map((el)=>(
-                <div>{el.name}</div>
+            <h1>{error}</h1>
+            {data?.map((el)=>(
+                <div key={el.workspaceId}>{el.name}</div>
             ))}
         </div>
     );

@@ -1,6 +1,5 @@
-import axios, {AxiosResponse} from "axios";
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {ICredentials} from "../../../models/models";
+import {IContent, ICredentials} from "../../models/models";
 
 export const register = createAsyncThunk(
     'auth/register',

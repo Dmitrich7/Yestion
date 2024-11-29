@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from "./RegisterPage.module.scss"
 import {ICredentials} from "../../models/models";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {login, register} from "../../store/reducers/AuthHandling/ActionCreators";
+import {login, register} from "../../store/reducers/ActionCreators";
 import {useNavigate} from "react-router-dom";
 
 const LoginPage = () => {

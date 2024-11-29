@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {login, logout} from "./ActionCreators";
+import {login, logout} from "../ActionCreators";
 
 interface ILoginSlice{
     isLoggedIn: boolean;
