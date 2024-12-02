@@ -30,6 +30,10 @@ export const loginSlice = createSlice({
             .addCase(logout.fulfilled,(state)=>{
                 state.isLoggedIn = false;
             })
+            .addCase(logout.rejected,(state,action)=>{
+                state.isLoggedIn = false;
+                localStorage.removeItem("Authorization");
+            })
             .addCase(login.rejected,(state, action)=>{
                 state.isLoading = false;
                 state.error = action.error.message??"";

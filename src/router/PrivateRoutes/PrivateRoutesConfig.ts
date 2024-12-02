@@ -3,5 +3,5 @@ export enum AppRoutes{
 }
 
 export const RoutePath: Record<AppRoutes,string> = {
-    [AppRoutes.WORKSPACE]: '/workspace',
+    [AppRoutes.WORKSPACE]: '/workspace/:workspaceId/:pageId',
 }

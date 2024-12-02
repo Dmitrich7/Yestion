@@ -1,12 +1,16 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {getData, logout} from "../../store/reducers/ActionCreators";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import styles from "./WorkspacePage.module.scss"
+import EditPage from "../../components/EditPage/EditPage";
 
 const WorkspacePage = () => {
     const dispatch = useAppDispatch();
     const {data, error} = useAppSelector(state => state.dataReducer)
+    const {workspaceId, pageId} = useParams();
     const navigate = useNavigate();
+
     useEffect(()=>{
         dispatch(getData())
     },[])
@@ -20,11 +24,8 @@ const WorkspacePage = () => {
     },[error])
 
     return (
-        <div>
-            <h1>{error}</h1>
-            {data?.map((el)=>(
-                <div key={el.workspaceId}>{el.name}</div>
-            ))}
+        <div className={styles.layout}>
+            <EditPage></EditPage>
         </div>
     );
 };

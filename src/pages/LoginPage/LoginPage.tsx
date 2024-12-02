@@ -13,7 +13,7 @@ const LoginPage = () => {
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         dispatch(login(formData)).then((res)=>{
-            if(res.payload!=""){
+            if(res.payload!=""&&res.payload!="Failed to fetch"){
                 navigate("/")
             }
         });

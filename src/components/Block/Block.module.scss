@@ -1,0 +1,38 @@
+@use "src/mixins/typography" as mixins;
+
+.layout{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 60%;
+  min-height: 5vw;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  .dragHandle{
+    position: absolute;
+    font-size: 2rem;
+    left:19.2%;
+    margin-top: 2px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .title{
+    @include mixins.typography;
+    font-size: 1.2rem;
+    height: 4vh;
+    resize: none;
+    margin-left: 3px;
+  }
+  .content{
+    @include mixins.typography;
+    font-weight: lighter;
+    font-size: 1rem;
+    resize: none;
+    min-height: 8vh;
+    margin-left: 3px;
+  }
+}
+.layoutFocused{
+  border-left: #00beff 5px solid;
+}

@@ -1,11 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getData} from "./ActionCreators";
 import {IContent, IWorkspace} from "../../models/models";
+import {useParams} from "react-router-dom";
 
 interface IDataSlice{
     data: IWorkspace[];
     isLoading: boolean;
     error: string;
+    currentBlockId: number;
     currentWorkspaceId: number;
     currentPageId: number;
 }
@@ -18,10 +20,13 @@ const initialState: IDataSlice = {
             pages: [
                 {
                     title: "",
+                    frontendId: -1,
                     pageBlocks: [
                         {
                             type: "",
-                            content: ""
+                            title: "",
+                            content: "",
+                            frontendId: -1
                         }
                     ]
                 }
@@ -30,19 +35,39 @@ const initialState: IDataSlice = {
     ],
     isLoading: false,
     error: '',
-    currentWorkspaceId: 0,
-    currentPageId: 0
+    currentWorkspaceId: -1,
+    currentPageId: -1,
+    currentBlockId: -1
 }
 
 export const dataSlice = createSlice({
     name: "data",
     initialState: initialState,
     reducers: {
-        setCurrentPageId(state, action){
+        setCurrentBlockId(state, action){
+            state.currentBlockId = action.payload;
+        },
+        updateCurrentWorkspaceId(state, action){
+            state.currentWorkspaceId = action.payload;
+        },
+        updateCurrentPageId(state, action){
             state.currentPageId = action.payload;
         },
-        setCurrentWorkspaceId(state, action){
-            state.currentWorkspaceId = action.payload;
+        updateCurrentBlockId(state, action){
+            state.currentBlockId = action.payload;
+        },
+        updateBlock(state, action){
+            state.data[action.payload.currentWorkspaceId].pages[action.payload.currentPageId].pageBlocks[action.payload.currentBlockId] =
+                {
+                    ...state.data[action.payload.currentWorkspaceId].pages[action.payload.currentPageId].pageBlocks[action.payload.currentBlockId],
+                    [action.payload.name]: action.payload.value
+                }
+        },
+        addBlock(state,action){
+
+        },
+        deleteBlock(state,action){
+
         }
     },
     extraReducers: builder=>{

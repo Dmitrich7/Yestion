@@ -10,9 +10,11 @@ function App() {
     return (
         <div className="App">
             <Navbar/>
-            <div className="Nav">
-                {isLoggedIn&&<Sidebar/>}
-            </div>
+            {isLoggedIn&&
+                    <div className="Nav">
+                        <Sidebar/>
+                    </div>
+            }
             <div className="Router">
                 <AppRouter/>
             </div>

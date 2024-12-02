@@ -27,6 +27,7 @@ export const logoutSlice = createSlice({
         })
         .addCase(logout.rejected,(state,action)=>{
             state.isLoading = false;
+            localStorage.removeItem("Authorization");
             state.error = action.error.message??"";
         })
     }

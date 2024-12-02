@@ -3,7 +3,7 @@ import React from 'react';
 const ErrorPage = () => {
     return (
         <div>
-            Дофига тестер чи шо?
+            404
         </div>
     );
 };

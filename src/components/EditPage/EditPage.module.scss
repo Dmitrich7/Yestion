@@ -1,0 +1,64 @@
+@use "src/mixins/typography" as mixins;
+
+.page{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .workspaceTitle{
+    @include mixins.typography;
+    font-size: 3rem;
+  }
+  .pageTitle{
+    @include mixins.typography;
+    font-size: 2rem;
+    font-weight: initial;
+  }
+  .addBlock{
+    position: fixed;
+    right: 15%;
+    top: 15%;
+    background-color: #fcf8f3;
+    border: 2px solid rgba(0, 0, 0, 0.28);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    .addBlockIcon{
+      text-decoration: underline;
+      font-size: 2.5rem;
+      border-bottom: 1px black solid;
+      cursor: pointer;
+      &:hover{
+        color: #00beff;
+      }
+      &:active{
+        color: #84e1ff;
+      }
+    }
+    .deleteBlockIcon{
+      text-decoration: underline;
+      font-size: 2.5rem;
+      margin-top: 5px;
+      cursor: pointer;
+      &:hover{
+        color: #ff0000;
+      }
+      &:active{
+        color: rgb(148, 68, 68);
+      }
+    }
+    .saveIcon{
+      text-decoration: underline;
+      font-size: 2.5rem;
+      margin-top: 10px;
+      cursor: pointer;
+      &:hover{
+        color: #96ffd3;
+      }
+      &:active{
+        color: #73c0a0;
+      }
+    }
+  }
+}
+

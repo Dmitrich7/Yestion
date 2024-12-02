@@ -5,7 +5,7 @@ export const register = createAsyncThunk(
     'auth/register',
     async (params:ICredentials, thunkAPI) =>{
         try {
-            await fetch("http://povt-cluster.tstu.tver.ru:44666/api/auth/register",{
+            await fetch("http://povt-cluster.tstu.tver.ru:44667/api/auth/register",{
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
@@ -28,7 +28,7 @@ export const login = createAsyncThunk(
     async (params:ICredentials, thunkAPI) =>{
         try {
             const response =
-                await fetch("http://povt-cluster.tstu.tver.ru:44666/api/auth/login",{
+                await fetch("http://povt-cluster.tstu.tver.ru:44667/api/auth/login",{
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
@@ -49,9 +49,10 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk(
     'auth/logout',
-    async (params, thunkAPI) =>{
+    async (params, thunkAPI)=>{
         try {
-            await fetch("http://povt-cluster.tstu.tver.ru:44666/api/auth/logout",{
+            const response =
+            await fetch("http://povt-cluster.tstu.tver.ru:44667/api/auth/logout",{
                 method: "POST",
                 headers: {
                     "Authorization" : localStorage.getItem("Authorization") as string,
@@ -59,7 +60,7 @@ export const logout = createAsyncThunk(
                     "Content-Type": "application/json",
                 }
             })
-            console.log("logout")
+            return response;
         }catch (e) {
             let errorMessage = "Failed to do something exceptional";
             if (e instanceof Error) {
@@ -75,7 +76,7 @@ export const getData = createAsyncThunk(
     async (params, thunkAPI) =>{
         try {
             const response =
-                await fetch("http://povt-cluster.tstu.tver.ru:44666/api/data/workspacesList",{
+                await fetch("http://povt-cluster.tstu.tver.ru:44667/api/data/workspacesList",{
                     method: "GET",
                     headers: {
                         "Accept": "application/json",

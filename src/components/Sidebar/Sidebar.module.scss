@@ -1,15 +1,14 @@
-@mixin iconMixin{
-  font-size: 2rem;
-}
+@use "src/mixins/typography" as mixins;
 
 .modalContent{
   height: 100%;
   width: 17vw;
   position: absolute;
-  background-color: white;
+  background-color: #fcf8f3;
   top: 0;
   transition: left 1s;
   border-right: black 2px solid;
+  position: fixed;
   .buttonGroup{
     margin-top: 5px;
     width: 100%;
@@ -21,20 +20,26 @@
       display: flex;
       .title{
         line-height: 190%;
+        user-select: none;
+        @include mixins.typography;
       }
       .icon{
         font-size: 1.5rem;
-        margin-right: 7px;
+        margin-right: 5px;
         margin-top: 3px;
         cursor: pointer;
+        &:hover{
+          color: #00beff;
+        }
+        &:active{
+          color: #84e1ff;
+        }
       }
     }
     .collapse{
-      @include iconMixin;
+      margin-right: 2.5px;
+      font-size: 2rem;
       cursor: pointer;
-    }
-    .expand{
-      @include iconMixin;
     }
   }
   .sidebarContent{

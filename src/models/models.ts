@@ -3,14 +3,17 @@ export interface ICredentials {
     password: string;
 }
 
-interface IBlock{
+export interface IBlock{
     type: string;
+    title: string;
     content: string;
+    frontendId: number;
 }
 
-interface IPage{
+export interface IPage{
     title: string;
     pageBlocks: IBlock[];
+    frontendId: number;
 }
 
 export interface IWorkspace{
